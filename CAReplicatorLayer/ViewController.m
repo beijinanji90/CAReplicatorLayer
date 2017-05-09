@@ -108,6 +108,7 @@
     animationLayer.position = CGPointMake(self.view.center.x - 100, self.view.center.y);
     animationLayer.bounds = CGRectMake(0, 0, layerW, layerH);
     animationLayer.backgroundColor = [UIColor redColor].CGColor;
+#pragma mark -- 这个地方需要注意点（因为在动画的过程中，因为position不会变化，如果使用anchorPoint的默认值CGPointMake(0.5,0.5)的话，那么就会出现顶部、底部一起动的情形）
     animationLayer.anchorPoint = CGPointMake(0.5, 1);
     
     //动画组
@@ -116,6 +117,8 @@
     slowZoomAnimation.values = @[[self setValue:10],[self setValue:20],[self setValue:30],[self setValue:50],[self setValue:30],[self setValue:20],[self setValue:10]];
     slowZoomAnimation.duration = 1;
     slowZoomAnimation.repeatCount = MAXFLOAT;
+    
+    slowZoomAnimation.keyPath = @"";
     
     //2、颜色
     CABasicAnimation *colorAnimation = [CABasicAnimation animation];
